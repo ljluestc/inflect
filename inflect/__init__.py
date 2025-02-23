@@ -3904,9 +3904,8 @@ class engine:
             chunk = WHITESPACES_COMMA.sub(",", chunk)
 
             if group == 0 and first:
-                chunk = COMMA_WORD.sub(f" {andword} \\1", chunk)
+                chunk = COMMA_WORD.sub(f" {andword} " if andword.strip() else " ", chunk)
             chunk = WHITESPACES.sub(" ", chunk)
-            # chunk = re.sub(r"(\A\s|\s\Z)", self.blankfn, chunk)
             chunk = chunk.strip()
             if first:
                 first = None
@@ -3935,10 +3934,9 @@ class engine:
         valout = (
             ', '.join(numchunks)
             if group
-            else ''.join(self._render(numchunks, decimal, comma))
+            else ' '.join(numchunks)  # Fix: Use space instead of comma for non-grouped numbers
         )
         return signout + valout
-
     @staticmethod
     def _render(chunks, decimal, comma):
         first_item = chunks.pop(0)
