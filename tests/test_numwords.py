@@ -396,3 +396,15 @@ def test_issue_131():
     p = inflect.engine()
     for nth_word in inflect.nth_suff:
         assert p.number_to_words(nth_word) == "zero"
+
+
+def test_andword_comma():
+    p = inflect.engine()
+    assert p.number_to_words(541440, andword=',') == "five hundred, forty-one thousand, four hundred, forty"
+    assert p.number_to_words(123456, andword=',') == "one hundred, twenty-three thousand, four hundred, fifty-six"
+    assert p.number_to_words(1001, andword=',') == "one thousand, one"
+    assert p.number_to_words(101, andword=',') == "one hundred, one"
+    assert p.number_to_words(541440) == "five hundred and forty-one thousand four hundred and forty"
+    assert p.number_to_words(123456) == "one hundred and twenty-three thousand four hundred and fifty-six"
+    assert p.number_to_words(1001) == "one thousand and one"
+    assert p.number_to_words(101) == "one hundred and one"

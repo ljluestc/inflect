@@ -3904,8 +3904,8 @@ class engine:
             chunk = WHITESPACES_COMMA.sub(",", chunk)
 
             if group == 0 and first:
-                # Fix: Ensure the last part of the number is preserved
-                chunk = COMMA_WORD.sub(f"{andword} " if andword.strip() else " ", chunk)
+                # Fix: Ensure no extra space is added after the comma
+                chunk = COMMA_WORD.sub(f"{andword} " if andword.strip() else "", chunk)
             chunk = WHITESPACES.sub(" ", chunk)
             chunk = chunk.strip()
             if first:
