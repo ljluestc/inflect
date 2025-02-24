@@ -3904,9 +3904,8 @@ class engine:
             chunk = WHITESPACES_COMMA.sub(",", chunk)
 
             if group == 0 and first:
-                chunk = COMMA_WORD.sub(f" {andword} \\1", chunk)
+                chunk = COMMA_WORD.sub(f"{andword} " if andword.strip() else "", chunk)
             chunk = WHITESPACES.sub(" ", chunk)
-            # chunk = re.sub(r"(\A\s|\s\Z)", self.blankfn, chunk)
             chunk = chunk.strip()
             if first:
                 first = None
