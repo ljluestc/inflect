@@ -3904,7 +3904,8 @@ class engine:
             chunk = WHITESPACES_COMMA.sub(",", chunk)
 
             if group == 0 and first:
-                chunk = COMMA_WORD.sub(f"{andword} " if andword.strip() else "", chunk)
+                # Fix: Ensure the last part of the number is preserved
+                chunk = COMMA_WORD.sub(f"{andword} " if andword.strip() else " ", chunk)
             chunk = WHITESPACES.sub(" ", chunk)
             chunk = chunk.strip()
             if first:
@@ -3934,7 +3935,7 @@ class engine:
         valout = (
             ', '.join(numchunks)
             if group
-            else ''.join(self._render(numchunks, decimal, comma))
+            else ' '.join(numchunks)  # Fix: Use space to join non-grouped numbers
         )
         return signout + valout
 
